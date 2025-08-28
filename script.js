@@ -1,29 +1,44 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // 🛡️ Elementos do menu de acessibilidade
-    const runaAcessibilidade = document.getElementById('botao-acessibilidade');
-    const bauDeOpcoes = document.getElementById('opcoes-acessibilidade');
+    // ❄️ Efeito de neve
+    function criarNeve() {
+        const floco = document.createElement('div');
+        floco.classList.add('snowflake');
+        floco.textContent = '❄';
+        floco.style.left = Math.random() * window.innerWidth + 'px';
+        floco.style.fontSize = Math.random() * 24 + 12 + 'px';
+        floco.style.animationDuration = Math.random() * 5 + 5 + 's';
+        floco.style.opacity = Math.random();
+        floco.style.position = 'fixed';
+        floco.style.top = '-10px';
+        floco.style.zIndex = '9999';
+        floco.style.pointerEvents = 'none';
+        floco.style.color = '#fff';
+        floco.style.animation = 'fall linear infinite';
+        document.body.appendChild(floco);
+        setTimeout(() => floco.remove(), 10000);
+    }
+    setInterval(criarNeve, 300);
 
-    // 🧭 Alterna visibilidade das opções
-    runaAcessibilidade.addEventListener('click', function () {
-        runaAcessibilidade.classList.toggle('rotacao-botao');
-        bauDeOpcoes.classList.toggle('apresenta-lista');
+    // 🧭 Acessibilidade (opcional)
+    const botaoDeAcessibilidade = document.getElementById('botao-acessibilidade');
+    const opcoesDeAcessibilidade = document.getElementById('opcoes-acessibilidade');
+
+    botaoDeAcessibilidade?.addEventListener('click', function () {
+        botaoDeAcessibilidade.classList.toggle('rotacao-botao');
+        opcoesDeAcessibilidade.classList.toggle('apresenta-lista');
     });
 
-    // 📜 Botões de ajuste de fonte
-    const aumentarRunas = document.getElementById('aumentar-fonte');
-    const diminuirRunas = document.getElementById('diminuir-fonte');
+    const aumentaFonteBotao = document.getElementById('aumentar-fonte');
+    const diminuiFonteBotao = document.getElementById('diminuir-fonte');
+    let tamanhoAtualFonte = 1;
 
-    let escalaFonteAtual = 1;
-
-    // 🔊 Aumenta o tamanho das runas (fonte)
-    aumentarRunas.addEventListener('click', function () {
-        escalaFonteAtual += 0.1;
-        document.body.style.fontSize = `${escalaFonteAtual}rem`;
+    aumentaFonteBotao?.addEventListener('click', function () {
+        tamanhoAtualFonte += 0.1;
+        document.body.style.fontSize = `${tamanhoAtualFonte}rem`;
     });
 
-    // 🔇 Diminui o tamanho das runas (fonte)
-    diminuirRunas.addEventListener('click', function () {
-        escalaFonteAtual = Math.max(0.5, escalaFonteAtual - 0.1); // Evita fonte muito pequena
-        document.body.style.fontSize = `${escalaFonteAtual}rem`;
+    diminuiFonteBotao?.addEventListener('click', function () {
+        tamanhoAtualFonte = Math.max(0.5, tamanhoAtualFonte - 0.1);
+        document.body.style.fontSize = `${tamanhoAtualFonte}rem`;
     });
 });
